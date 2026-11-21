@@ -352,13 +352,26 @@ footer ul a:hover{color:#fff;}
   .card-n{font-size:17px;}
   .dots{display:none;}
 }
+.tag.gris{background:#6E6A63;color:#fff;}
+.card.agotado .card-img img{opacity:.55;filter:grayscale(.5);}
+.btn-s:disabled{background:#B9B4AA;border-color:#B9B4AA;cursor:not-allowed;}
+#qv-stock{font-size:12.5px;color:var(--vino);margin:-6px 0 14px;min-height:1em;}
+.sk-img{aspect-ratio:4/5;background:var(--crema2);margin-bottom:14px;animation:pulse 1.4s ease-in-out infinite;}
+.sk-l{height:14px;background:var(--crema2);width:80%;margin-bottom:8px;animation:pulse 1.4s ease-in-out infinite;}
+.sk-l.s{width:40%;}
+@keyframes pulse{50%{opacity:.5}}
+.cancelado{background:#F6E8E8;color:var(--vino);padding:14px;font-size:14px;margin-bottom:20px;}
+.r-msg{color:var(--gris);font-size:14px;margin-top:16px;text-align:center;}
+.r-items{list-style:none;text-align:left;font-size:13.5px;color:var(--gris);border-top:1px solid var(--linea);padding-top:12px;}
+.r-items li{padding:3px 0;}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
 <div class="anuncio" aria-live="polite">
-  <span class="on">Envío <b>gratis</b> en compras mayores a $2,500</span>
+  <span class="on">Envío <b>gratis</b> en compras mayores a <span class="cfg-gratis">$2,500</span></span>
   <span>Monograma con tus iniciales en camisas y suéteres</span>
   <span>Devoluciones sin costo durante <b>30 días</b></span>
 </div>
@@ -399,6 +412,7 @@ footer ul a:hover{color:#fff;}
     <div><a href="#catalogo" onclick="filtrar('accesorios')">Accesorios</a></div>
     <div><a href="#catalogo" onclick="filtrar('hogar')">Hogar</a></div>
     <div><a href="#monograma">Monograma</a></div>
+    <div><a href="#" onclick="event.preventDefault();abrirRastreo()">Rastrear pedido</a></div>
   </nav>
 </header>
 
@@ -489,7 +503,7 @@ footer ul a:hover{color:#fff;}
         <button class="hilo" style="background:#B08D57" data-c="#B08D57" onclick="hilo(this)" aria-label="Dorado"></button>
         <button class="hilo" style="background:#2F4A3A" data-c="#2F4A3A" onclick="hilo(this)" aria-label="Verde"></button>
       </div>
-      <a href="#catalogo" class="btn-s" onclick="filtrar('hombre')">Elegir prenda · +$350</a>
+      <a href="#catalogo" class="btn-s" onclick="filtrar('hombre')">Elegir prenda · +<span class="cfg-mono">$350</span></a>
     </div>
     <div class="mono-prev">
       <div class="camisa"><div class="bordado" id="bordado" style="color:#0F1E36">ARM</div></div>
@@ -500,7 +514,7 @@ footer ul a:hover{color:#fff;}
 
 <section class="serv">
   <div class="serv-g">
-    <div class="sv"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><h4>Envío gratis</h4><p>En compras mayores a $2,500</p></div>
+    <div class="sv"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><h4>Envío gratis</h4><p>En compras mayores a <span class="cfg-gratis">$2,500</span></p></div>
     <div class="sv"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"/></svg><h4>30 días</h4><p>Para cambios y devoluciones</p></div>
     <div class="sv"><svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11"/><path d="M4 13h16M12 9v11M12 9c-2-4-6-3-5 0M12 9c2-4 6-3 5 0"/></svg><h4>Empaque de regalo</h4><p>Caja, papel y tarjeta escrita a mano</p></div>
     <div class="sv"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg><h4>Asesoría personal</h4><p>Te ayudamos con tallas por WhatsApp</p></div>
@@ -521,7 +535,7 @@ footer ul a:hover{color:#fff;}
     <div class="f-g">
       <div class="f-logo"><span class="lw">Harlow<i>&amp;</i>Blake</span><p>Moda clásica para hombre, mujer y hogar. Sastrería y tejidos desde 1974.</p></div>
       <div><h5>Comprar</h5><ul><li><a href="#catalogo" onclick="filtrar('hombre')">Hombre</a></li><li><a href="#catalogo" onclick="filtrar('mujer')">Mujer</a></li><li><a href="#catalogo" onclick="filtrar('calzado')">Calzado</a></li><li><a href="#catalogo" onclick="filtrar('hogar')">Hogar</a></li></ul></div>
-      <div><h5>Ayuda</h5><ul><li><a href="#" onclick="event.preventDefault();toast('Guía de tallas próximamente')">Guía de tallas</a></li><li><a href="#" onclick="event.preventDefault()">Envíos</a></li><li><a href="#" onclick="event.preventDefault()">Devoluciones</a></li><li><a href="#" class="wa-link" target="_blank" rel="noopener">WhatsApp</a></li></ul></div>
+      <div><h5>Ayuda</h5><ul><li><a href="#" onclick="event.preventDefault();toast('Guía de tallas próximamente')">Guía de tallas</a></li><li><a href="#" onclick="event.preventDefault()">Envíos</a></li><li><a href="#" onclick="event.preventDefault();abrirRastreo()">Rastrear pedido</a></li><li><a href="#" onclick="event.preventDefault()">Devoluciones</a></li><li><a href="#" class="wa-link" target="_blank" rel="noopener">WhatsApp</a></li></ul></div>
       <div><h5>La casa</h5><ul><li><a href="#monograma">Monograma</a></li><li><a href="#" onclick="event.preventDefault()">Nuestra historia</a></li><li><a href="#" onclick="event.preventDefault()">Tiendas</a></li></ul></div>
       <div><h5>Síguenos</h5><ul><li><a href="#" onclick="event.preventDefault()">Instagram</a></li><li><a href="#" onclick="event.preventDefault()">Facebook</a></li><li><a href="#" onclick="event.preventDefault()">TikTok</a></li></ul></div>
     </div>
@@ -538,7 +552,7 @@ footer ul a:hover{color:#fff;}
     <div class="envio-bar" id="envio-bar"></div>
     <div class="tot"><span>Subtotal</span><span id="t-sub">$0</span></div>
     <div class="tot"><span>Envío</span><span id="t-env">$0</span></div>
-    <label class="gift"><input type="checkbox" id="regalo" onchange="actualizarBolsa()"> Empaque de regalo (+$150)</label>
+    <label class="gift"><input type="checkbox" id="regalo" onchange="actualizarBolsa()"> Empaque de regalo (+<span class="cfg-regalo">$150</span>)</label>
     <div class="tot big"><span>Total</span><span id="t-tot">$0</span></div>
     <button class="btn-s" onclick="abrirCheckout()">Finalizar compra</button>
   </div>
@@ -554,6 +568,7 @@ footer ul a:hover{color:#fff;}
   <a href="#catalogo" onclick="cerrarTodo();filtrar('accesorios')">Accesorios</a>
   <a href="#catalogo" onclick="cerrarTodo();filtrar('hogar')">Hogar</a>
   <a href="#monograma" onclick="cerrarTodo()">Monograma</a>
+  <a href="#" onclick="event.preventDefault();abrirRastreo()">Rastrear pedido</a>
 </aside>
 
 <!-- ═══ BUSCAR ═══ -->
@@ -581,11 +596,12 @@ footer ul a:hover{color:#fff;}
         <div class="opt"><div class="opt-l">Color <span id="qv-cn"></span></div><div class="sw-row" id="qv-sw"></div></div>
         <div class="opt" id="qv-size-w"><div class="opt-l">Talla <span id="qv-sn">Elige una talla</span></div><div class="sizes" id="qv-sz"></div></div>
         <div class="mono-opt" id="qv-mono">
-          <label><input type="checkbox" id="qv-mono-c" onchange="document.getElementById('qv-mono').classList.toggle('on',this.checked)"> Agregar monograma bordado (+$350)</label>
+          <label><input type="checkbox" id="qv-mono-c" onchange="document.getElementById('qv-mono').classList.toggle('on',this.checked)"> Agregar monograma bordado (+<span class="cfg-mono">$350</span>)</label>
           <div class="mi"><input id="qv-mono-t" maxlength="3" placeholder="ARM" aria-label="Iniciales"><small>Hasta 3 iniciales</small></div>
         </div>
-        <button class="btn-s" onclick="agregar()">Agregar a la bolsa</button>
-        <div class="qv-meta"><span>✓ Envío gratis desde $2,500</span><span>✓ 30 días para devoluciones</span></div>
+        <div id="qv-stock"></div>
+        <button class="btn-s" id="qv-add" onclick="agregar()">Agregar a la bolsa</button>
+        <div class="qv-meta"><span>✓ Envío gratis desde <span class="cfg-gratis">$2,500</span></span><span>✓ 30 días para devoluciones</span></div>
       </div>
     </div>
   </div>
@@ -613,65 +629,82 @@ footer ul a:hover{color:#fff;}
       <button data-v="Pago en tienda" onclick="elegirPago(this)">Pago en tienda</button>
     </div>
     <div class="res" id="c-res"></div>
-    <button class="btn-s" onclick="confirmar()">Confirmar pedido</button>
+    <button class="btn-s" id="c-btn" onclick="confirmar()">Confirmar pedido</button>
+  </div>
+</div>
+
+<!-- ═══ RASTREO ═══ -->
+<div class="md" id="md-rs">
+  <div class="mc co">
+    <button class="x" onclick="cerrarModal('md-rs')" aria-label="Cerrar">×</button>
+    <h3>Rastrea tu pedido</h3>
+    <p class="sub">Escribe el folio que te dimos al comprar y los últimos 4 dígitos de tu WhatsApp.</p>
+    <div class="f2">
+      <div class="fld"><label>Folio</label><input id="r-folio" placeholder="HB-0012" autocomplete="off"></div>
+      <div class="fld"><label>Últimos 4 dígitos</label><input id="r-tel" inputmode="numeric" maxlength="4" placeholder="5678"></div>
+    </div>
+    <button class="btn-s" style="width:100%" onclick="rastrear()">Buscar pedido</button>
+    <div id="r-res"></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const WHATSAPP = '523300000000'; // ⬅️ número del negocio (52 + 10 dígitos)
-const U = id => `https://images.unsplash.com/${id}?w=900&q=80&auto=format&fit=crop`;
-const COLORES = {marino:'#1C2E4C', crema:'#EFE8DA', vino:'#6B1F2A', gris:'#8A8A86', camel:'#B98A5E', negro:'#1A1A1A', blanco:'#FFFFFF', verde:'#2F4A3A', cafe:'#6A4A33', azul:'#4E6E99'};
-const TALLAS = {ropa:['XS','S','M','L','XL'], calzado:['25','26','27','28','29'], unica:null};
+/* ═══ CONEXIÓN ═══ */
+const SUPABASE_URL = 'https://uwwvwohlucipruafernq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Ujt-41nlFGJhoDATX5Gcxg_IcPHPQp9'; // llave pública: es seguro que esté aquí
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const productos = [
-  {id:1, n:'Saco de cuadros Príncipe de Gales', cat:'hombre', tipo:'Sastrería', p:5890, img:['photo-1593030089683-a9841767a610','photo-1564859228273-274232fdb516'], col:['gris','marino'], t:'ropa', nuevo:true, mono:false,
-   d:'Saco de lana con cuadro Príncipe de Gales, solapa de muesca y forro de satén. Corte a la medida que se ve igual de bien con jeans que con pantalón de vestir.'},
-  {id:2, n:'Polo de piqué a rayas', cat:'hombre', tipo:'Polos', p:1290, img:['photo-1565688540139-3b8e4849436b','photo-1619950463968-f2bfb9341d00'], col:['marino','gris'], t:'ropa', nuevo:true, mono:true,
-   d:'Polo de algodón piqué con rayas finas y cuello reforzado. Se suaviza con cada lavada.'},
-  {id:3, n:'Polo clásico de algodón', cat:'hombre', tipo:'Polos', p:1090, img:['photo-1619950463968-f2bfb9341d00','photo-1565688540139-3b8e4849436b'], col:['negro','marino','blanco'], t:'ropa', mono:true,
-   d:'El polo de siempre: algodón peinado, dos botones y un corte que no pasa de moda.'},
-  {id:4, n:'Suéter de ochos tejido', cat:'hombre', tipo:'Tejidos', p:2390, img:['photo-1758537698215-af1e35acb911','photo-1564859228273-274232fdb516'], col:['crema','vino','verde'], t:'ropa', top:true, mono:true,
-   d:'Suéter de punto grueso con trenzas tipo aran. Lana con algodón, cálido sin ser pesado.'},
-  {id:5, n:'Camiseta de algodón pima', cat:'hombre', tipo:'Básicos', p:690, img:['photo-1564859228273-274232fdb516','photo-1619950463968-f2bfb9341d00'], col:['blanco','marino','gris'], t:'ropa',
-   d:'Camiseta de algodón pima de fibra larga, cuello redondo que no se deforma.'},
-  {id:6, n:'Gabardina clásica', cat:'mujer', tipo:'Abrigos', p:6490, img:['photo-1724709972210-4beb408de580','photo-1543270122-2b8544b8a4de'], col:['camel','negro'], t:'ropa', nuevo:true, top:true,
-   d:'Gabardina cruzada de algodón con cinturón, charreteras y forro de cuadros. Repele la lluvia ligera.'},
-  {id:7, n:'Abrigo largo de lana', cat:'mujer', tipo:'Abrigos', p:7290, img:['photo-1574740919036-cc8b2e17103d','photo-1606254094195-33682e329ae1'], col:['negro','camel'], t:'ropa',
-   d:'Abrigo recto de paño de lana con solapa amplia. Elegante sobre un vestido o con jeans y suéter.'},
-  {id:8, n:'Abrigo azul cruzado', cat:'mujer', tipo:'Abrigos', p:6890, img:['photo-1556157382-97eda2d62296','photo-1698681375999-8faa3e824cd9'], col:['azul','marino'], t:'ropa', nuevo:true,
-   d:'Abrigo cruzado con botones dorados y corte entallado. Un color que ilumina el invierno.'},
-  {id:9, n:'Abrigo camel oversized', cat:'mujer', tipo:'Abrigos', p:5990, viejo:7490, img:['photo-1543270122-2b8544b8a4de','photo-1606254094195-33682e329ae1'], col:['camel','crema'], t:'ropa',
-   d:'Abrigo amplio en tono camel con hombro caído. Se pone encima de todo.'},
-  {id:10, n:'Abrigo con gorro de lana', cat:'mujer', tipo:'Abrigos', p:6290, img:['photo-1698681375999-8faa3e824cd9','photo-1556157382-97eda2d62296'], col:['azul','gris'], t:'ropa',
-   d:'Abrigo de lana con cuello alto. Combina perfecto con un gorro de fieltro.'},
-  {id:11, n:'Guantes largos de satén', cat:'accesorios', tipo:'Accesorios', p:1490, img:['photo-1760969485983-c7b370a1532f','photo-1574740919036-cc8b2e17103d'], col:['negro'], t:'unica', nuevo:true,
-   d:'Guantes largos de satén para noche. Un toque de elegancia clásica para ocasiones especiales.'},
-  {id:12, n:'Portafolio de piel', cat:'accesorios', tipo:'Accesorios', p:4290, img:['photo-1451680350250-2ae7d6e00f5a','photo-1510356466913-16752a2a3639'], col:['negro','cafe'], t:'unica', mono:true,
-   d:'Portafolio de piel de grano completo con compartimento acolchado para laptop. Se puede grabar con tus iniciales.'},
-  {id:13, n:'Mocasín de piel', cat:'calzado', tipo:'Calzado', p:3290, img:['photo-1517137931843-463a3930961c','photo-1576133385309-203e67da8e58'], col:['cafe'], t:'calzado', top:true,
-   d:'Mocasín de piel con suela de cuero cosida a mano. Se amolda a tu pie con el uso.'},
-  {id:14, n:'Zapato Oxford brogue', cat:'calzado', tipo:'Calzado', p:3890, img:['photo-1576133385309-203e67da8e58','photo-1517137931843-463a3930961c'], col:['cafe','negro'], t:'calzado',
-   d:'Oxford con picado brogue y punta de ala. El zapato de vestir más versátil.'},
-  {id:15, n:'Botín chukka de gamuza', cat:'calzado', tipo:'Calzado', p:3590, viejo:4290, img:['photo-1510356466913-16752a2a3639','photo-1517137931843-463a3930961c'], col:['camel','cafe'], t:'calzado',
-   d:'Botín chukka de piel con dos ojillos y suela de goma. Para el día a día con estilo.'},
-  {id:16, n:'Vela aromática de cedro', cat:'hogar', tipo:'Hogar', p:690, img:['photo-1561212856-44e9bae482aa','photo-1601922046210-41e129a3e64a'], col:['crema'], t:'unica', nuevo:true,
-   d:'Vela de cera de soya con notas de cedro, cuero y vainilla. 50 horas de duración.'},
-  {id:17, n:'Juego de copas de cristal', cat:'hogar', tipo:'Hogar', p:1890, img:['photo-1474722883778-792e7990302f','photo-1558346489-19413928158b'], col:['blanco'], t:'unica',
-   d:'Juego de 4 copas de cristal soplado. Delgadas, ligeras y perfectas para brindar.'},
-  {id:18, n:'Caja de regalo de la casa', cat:'hogar', tipo:'Regalos', p:2490, img:['photo-1549465220-1a8b9238cd48','photo-1561212856-44e9bae482aa'], col:['marino'], t:'unica', top:true,
-   d:'Caja de regalo con vela, tarjeta escrita a mano y una pieza a elegir. Lista para entregar.'},
-];
+let CFG = { whatsapp:'523300000000', envio_gratis_desde:2500, costo_envio:190, costo_monograma:350, costo_regalo:150 };
+const COLORES = {marino:'#1C2E4C', crema:'#EFE8DA', vino:'#6B1F2A', gris:'#8A8A86', camel:'#B98A5E', negro:'#1A1A1A', blanco:'#FFFFFF', verde:'#2F4A3A', cafe:'#6A4A33', azul:'#4E6E99', rosa:'#D9A5A5', beige:'#D8C8A8'};
+const TALLAS = {ropa:['XS','S','M','L','XL'], calzado:['25','26','27','28','29'], unica:null};
 const CATN = {hombre:'Hombre', mujer:'Mujer', calzado:'Calzado', accesorios:'Accesorios', hogar:'Hogar'};
+const PLACEHOLDER = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><rect width="4" height="5" fill="#EDE6D9"/></svg>');
+const U = src => src || PLACEHOLDER;
 const money = n => '$' + Math.round(n).toLocaleString('es-MX');
-const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
+const colorHex = c => COLORES[c] || '#CCCCCC';
+
+let productos = [];
+let cargado = false;
+
+async function cargarConfig(){
+  try {
+    const { data } = await sb.rpc('config_publica');
+    if(data){
+      CFG.whatsapp = data.whatsapp || CFG.whatsapp;
+      ['envio_gratis_desde','costo_envio','costo_monograma','costo_regalo'].forEach(k => { if(data[k] != null) CFG[k] = Number(data[k]); });
+    }
+  } catch(e) {}
+  document.querySelectorAll('.cfg-gratis').forEach(el => el.textContent = money(CFG.envio_gratis_desde));
+  document.querySelectorAll('.cfg-mono').forEach(el => el.textContent = money(CFG.costo_monograma));
+  document.querySelectorAll('.cfg-regalo').forEach(el => el.textContent = money(CFG.costo_regalo));
+  document.querySelectorAll('.wa-link').forEach(a => a.href = `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent('Hola, quiero información sobre una prenda.')}`);
+}
+
+async function cargarProductos(){
+  const { data, error } = await sb.from('productos').select('id,nombre,categoria,tipo,precio,precio_anterior,descripcion,imagenes,colores,tallas,stock,nuevo,destacado,monograma').order('id');
+  if(error){
+    document.getElementById('grid').innerHTML = '<div class="empty-g">No pudimos cargar la colección. Revisa tu conexión y recarga la página.</div>';
+    return;
+  }
+  productos = data.map(p => ({
+    id:p.id, n:p.nombre, cat:p.categoria, tipo:p.tipo, p:Number(p.precio), viejo:p.precio_anterior ? Number(p.precio_anterior) : null,
+    d:p.descripcion, img:(p.imagenes && p.imagenes.length ? p.imagenes : [null]), col:(p.colores && p.colores.length ? p.colores : ['crema']),
+    t:p.tallas, stock:p.stock, nuevo:p.nuevo, top:p.destacado, mono:p.monograma
+  }));
+  cargado = true;
+  favs = favs.filter(id => productos.some(p => p.id === id)); guardarFavs();
+  render(); contadores();
+}
 
 /* ═══ ANUNCIO ROTATIVO ═══ */
 (() => { const s = document.querySelectorAll('.anuncio span'); let i = 0;
   setInterval(() => { s[i].classList.remove('on'); i = (i+1) % s.length; s[i].classList.add('on'); }, 4000); })();
 
-/* ═══ FAVORITOS (con localStorage seguro) ═══ */
+/* ═══ FAVORITOS ═══ */
 let favs = [];
 try { favs = JSON.parse(localStorage.getItem('hb_favs') || '[]'); } catch(e) { favs = []; }
 function guardarFavs(){ try { localStorage.setItem('hb_favs', JSON.stringify(favs)); } catch(e) {} }
@@ -701,25 +734,33 @@ function lista(){
   if(o==='asc') l = [...l].sort((a,b)=>a.p-b.p);
   if(o==='desc') l = [...l].sort((a,b)=>b.p-a.p);
   if(o==='dest') l = [...l].sort((a,b)=>(b.top?1:0)-(a.top?1:0));
-  return l;
+  return [...l.filter(p=>p.stock>0), ...l.filter(p=>p.stock<=0)];
+}
+function etiqueta(p){
+  if(p.stock <= 0) return '<span class="tag gris">Agotado</span>';
+  if(p.viejo) return '<span class="tag vino">Rebaja</span>';
+  if(p.stock <= 3) return '<span class="tag">Últimas piezas</span>';
+  if(p.nuevo) return '<span class="tag">Nuevo</span>';
+  return '';
 }
 function render(){
+  if(!cargado) return;
   const l = lista();
   document.getElementById('count').textContent = filtro==='favs' ? `${l.length} favoritos` : `${l.length} piezas`;
   document.getElementById('grid').innerHTML = l.length ? l.map(p => `
-    <article class="card">
+    <article class="card ${p.stock<=0?'agotado':''}">
       <div class="card-img" onclick="abrirQV(${p.id})">
-        ${p.viejo ? '<span class="tag vino">Rebaja</span>' : p.nuevo ? '<span class="tag">Nuevo</span>' : ''}
+        ${etiqueta(p)}
         <button class="heart ${favs.includes(p.id)?'on':''}" onclick="toggleFav(${p.id},event)" aria-label="Favorito"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></button>
-        <img src="${U(p.img[0])}" alt="${esc(p.n)}" loading="lazy">
-        <img class="alt" src="${U(p.img[1])}" alt="" loading="lazy">
-        <button class="qv" onclick="event.stopPropagation();abrirQV(${p.id})">Vista rápida</button>
+        <img src="${esc(U(p.img[0]))}" alt="${esc(p.n)}" loading="lazy">
+        ${p.img[1] ? `<img class="alt" src="${esc(U(p.img[1]))}" alt="" loading="lazy">` : ''}
+        <button class="qv" onclick="event.stopPropagation();abrirQV(${p.id})">${p.stock<=0?'Ver detalles':'Vista rápida'}</button>
       </div>
       <div class="card-n" onclick="abrirQV(${p.id})">${esc(p.n)}</div>
-      <div class="card-sub">${p.tipo}${p.mono?' · Monograma disponible':''}</div>
+      <div class="card-sub">${esc(p.tipo)}${p.mono?' · Monograma disponible':''}</div>
       <div class="card-row">
         <span class="price">${money(p.p)}${p.viejo?`<s>${money(p.viejo)}</s>`:''}</span>
-        <span class="dots">${p.col.map(c=>`<span class="dot" style="background:${COLORES[c]}"></span>`).join('')}</span>
+        <span class="dots">${p.col.map(c=>`<span class="dot" style="background:${colorHex(c)}"></span>`).join('')}</span>
       </div>
     </article>`).join('') : '<div class="empty-g">No hay piezas en esta selección.</div>';
 }
@@ -727,37 +768,44 @@ function render(){
 /* ═══ VISTA RÁPIDA ═══ */
 let qv = null, qvColor = null, qvTalla = null;
 function abrirQV(id){
-  qv = productos.find(p=>p.id===id); qvColor = qv.col[0]; qvTalla = null;
+  qv = productos.find(p=>p.id===id); if(!qv) return;
+  qvColor = qv.col[0]; qvTalla = null;
   document.getElementById('qv-img').src = U(qv.img[0]);
   document.getElementById('qv-img').alt = qv.n;
-  document.getElementById('qv-thumbs').innerHTML = qv.img.map((im,i)=>`<button class="${i?'':'on'}" onclick="qvFoto(${i},this)"><img src="${U(im)}" alt=""></button>`).join('');
-  document.getElementById('qv-cat').textContent = CATN[qv.cat] + ' · ' + qv.tipo;
+  document.getElementById('qv-thumbs').innerHTML = qv.img.length > 1 ? qv.img.map((im,i)=>`<button class="${i?'':'on'}" onclick="qvFoto(${i},this)"><img src="${esc(U(im))}" alt=""></button>`).join('') : '';
+  document.getElementById('qv-cat').textContent = (CATN[qv.cat]||'') + (qv.tipo ? ' · ' + qv.tipo : '');
   document.getElementById('qv-n').textContent = qv.n;
   document.getElementById('qv-p').innerHTML = money(qv.p) + (qv.viejo?` <s>${money(qv.viejo)}</s>`:'');
   document.getElementById('qv-d').textContent = qv.d;
-  document.getElementById('qv-sw').innerHTML = qv.col.map((c,i)=>`<button class="sw ${i?'':'on'}" style="background:${COLORES[c]}" onclick="qvCol('${c}',this)" aria-label="${c}"></button>`).join('');
+  document.getElementById('qv-sw').innerHTML = qv.col.map((c,i)=>`<button class="sw ${i?'':'on'}" style="background:${colorHex(c)}" onclick="qvCol('${esc(c)}',this)" aria-label="${esc(c)}"></button>`).join('');
   document.getElementById('qv-cn').textContent = cap(qvColor);
   const tallas = TALLAS[qv.t];
   document.getElementById('qv-size-w').style.display = tallas ? '' : 'none';
   document.getElementById('qv-sn').textContent = 'Elige una talla';
   document.getElementById('qv-sz').innerHTML = tallas ? tallas.map(t=>`<button class="sz" onclick="qvSz('${t}',this)">${t}</button>`).join('') : '';
-  document.getElementById('qv-mono').style.display = qv.mono ? '' : 'none';
+  document.getElementById('qv-mono').style.display = qv.mono && qv.stock>0 ? '' : 'none';
   document.getElementById('qv-mono').classList.remove('on');
   document.getElementById('qv-mono-c').checked = false;
   document.getElementById('qv-mono-t').value = '';
+  const btn = document.getElementById('qv-add');
+  btn.disabled = qv.stock <= 0;
+  btn.textContent = qv.stock <= 0 ? 'Agotado' : 'Agregar a la bolsa';
+  document.getElementById('qv-stock').textContent = qv.stock <= 0 ? 'Sin piezas por ahora. Escríbenos por WhatsApp para avisarte.' : qv.stock <= 3 ? `Solo quedan ${qv.stock} piezas` : '';
   abrirModal('md-qv');
 }
-const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 function qvFoto(i, btn){ document.getElementById('qv-img').src = U(qv.img[i]); document.querySelectorAll('#qv-thumbs button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); }
 function qvCol(c, btn){ qvColor = c; document.querySelectorAll('#qv-sw .sw').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); document.getElementById('qv-cn').textContent = cap(c); }
 function qvSz(t, btn){ qvTalla = t; document.querySelectorAll('#qv-sz .sz').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); document.getElementById('qv-sn').textContent = t; }
 
 /* ═══ BOLSA ═══ */
 let bolsa = [];
+const enBolsa = id => bolsa.filter(b=>b.id===id).reduce((s,b)=>s+b.q,0);
 function agregar(){
+  if(!qv || qv.stock <= 0) return;
   if(TALLAS[qv.t] && !qvTalla){ toast('Elige una talla'); return; }
+  if(enBolsa(qv.id) + 1 > qv.stock){ toast(`Solo hay ${qv.stock} piezas disponibles`); return; }
   const monoOn = qv.mono && document.getElementById('qv-mono-c').checked;
-  const ini = document.getElementById('qv-mono-t').value.trim().toUpperCase();
+  const ini = document.getElementById('qv-mono-t').value.replace(/[^a-zA-ZñÑ]/g,'').toUpperCase().slice(0,3);
   if(monoOn && !ini){ toast('Escribe tus iniciales'); return; }
   const key = [qv.id, qvColor, qvTalla, monoOn?ini:''].join('|');
   const ya = bolsa.find(b=>b.key===key);
@@ -766,10 +814,16 @@ function agregar(){
   cerrarModal('md-qv'); actualizarBolsa(); abrirBolsa();
   toast(`${qv.n} agregado`);
 }
-function precioItem(b){ const p = productos.find(x=>x.id===b.id); return p.p + (b.mono?350:0); }
+function precioItem(b){ const p = productos.find(x=>x.id===b.id); return p ? p.p + (b.mono?CFG.costo_monograma:0) : 0; }
 function subtotal(){ return bolsa.reduce((s,b)=>s+precioItem(b)*b.q,0); }
-function envio(){ const s = subtotal(); return s===0 || s>=2500 ? 0 : 190; }
-function cambiarQ(key,d){ const b = bolsa.find(x=>x.key===key); if(!b) return; b.q += d; if(b.q<=0) bolsa = bolsa.filter(x=>x.key!==key); actualizarBolsa(); }
+function envio(){ const s = subtotal(); return s===0 || s>=CFG.envio_gratis_desde ? 0 : CFG.costo_envio; }
+function cambiarQ(key,d){
+  const b = bolsa.find(x=>x.key===key); if(!b) return;
+  const p = productos.find(x=>x.id===b.id);
+  if(d>0 && p && enBolsa(b.id) + 1 > p.stock){ toast(`Solo hay ${p.stock} piezas disponibles`); return; }
+  if(d>0 && b.q >= 20){ toast('Máximo 20 piezas por artículo'); return; }
+  b.q += d; if(b.q<=0) bolsa = bolsa.filter(x=>x.key!==key); actualizarBolsa();
+}
 function quitar(key){ bolsa = bolsa.filter(x=>x.key!==key); actualizarBolsa(); }
 function actualizarBolsa(){
   contadores();
@@ -777,20 +831,20 @@ function actualizarBolsa(){
   if(!bolsa.length){ b.innerHTML = '<div class="d-empty"><h4>Tu bolsa está vacía</h4><p>Descubre la colección y encuentra algo para ti.</p></div>'; f.style.display='none'; return; }
   f.style.display='block';
   b.innerHTML = bolsa.map(it=>{
-    const p = productos.find(x=>x.id===it.id);
-    return `<div class="ci"><img src="${U(p.img[0])}" alt="">
+    const p = productos.find(x=>x.id===it.id); if(!p) return '';
+    return `<div class="ci"><img src="${esc(U(p.img[0]))}" alt="">
       <div><div class="ci-n">${esc(p.n)}</div>
-        <div class="ci-m">Color: ${cap(it.color)}${it.talla?` · Talla: ${it.talla}`:''}${it.mono?`<br>Monograma: <b>${esc(it.mono)}</b> (+$350)`:''}</div>
-        <div class="ci-row"><div class="qty"><button onclick="cambiarQ('${it.key}',-1)" aria-label="Menos">−</button><span>${it.q}</span><button onclick="cambiarQ('${it.key}',1)" aria-label="Más">+</button></div><span class="price">${money(precioItem(it)*it.q)}</span></div>
-        <button class="ci-x" onclick="quitar('${it.key}')">Quitar</button>
+        <div class="ci-m">Color: ${esc(cap(it.color))}${it.talla?` · Talla: ${it.talla}`:''}${it.mono?`<br>Monograma: <b>${esc(it.mono)}</b> (+${money(CFG.costo_monograma)})`:''}</div>
+        <div class="ci-row"><div class="qty"><button onclick="cambiarQ('${esc(it.key)}',-1)" aria-label="Menos">−</button><span>${it.q}</span><button onclick="cambiarQ('${esc(it.key)}',1)" aria-label="Más">+</button></div><span class="price">${money(precioItem(it)*it.q)}</span></div>
+        <button class="ci-x" onclick="quitar('${esc(it.key)}')">Quitar</button>
       </div></div>`;
   }).join('');
-  const s = subtotal(), e = envio(), r = document.getElementById('regalo').checked ? 150 : 0;
+  const s = subtotal(), e = envio(), r = document.getElementById('regalo').checked ? CFG.costo_regalo : 0;
   document.getElementById('t-sub').textContent = money(s);
   document.getElementById('t-env').textContent = e ? money(e) : 'Gratis';
   document.getElementById('t-tot').textContent = money(s+e+r);
-  const falta = 2500 - s;
-  document.getElementById('envio-bar').innerHTML = (falta>0 ? `Te faltan <b>${money(falta)}</b> para envío gratis` : '¡Tienes <b>envío gratis</b>!') + `<div class="bar"><i style="width:${Math.min(100,s/2500*100)}%"></i></div>`;
+  const falta = CFG.envio_gratis_desde - s;
+  document.getElementById('envio-bar').innerHTML = (falta>0 ? `Te faltan <b>${money(falta)}</b> para envío gratis` : '¡Tienes <b>envío gratis</b>!') + `<div class="bar"><i style="width:${Math.min(100,s/CFG.envio_gratis_desde*100)}%"></i></div>`;
 }
 function contadores(){
   const n = bolsa.reduce((s,b)=>s+b.q,0);
@@ -800,10 +854,13 @@ function contadores(){
 
 /* ═══ CHECKOUT ═══ */
 let pagoSel = 'Tarjeta';
+const CO_HTML = document.getElementById('co-box').innerHTML;
 function elegirPago(btn){ pagoSel = btn.dataset.v; document.querySelectorAll('#pago button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); }
 function abrirCheckout(){
+  if(!bolsa.length) return;
   cerrarTodo();
-  const s = subtotal(), e = envio(), r = document.getElementById('regalo').checked ? 150 : 0;
+  document.getElementById('co-box').innerHTML = CO_HTML; pagoSel = 'Tarjeta';
+  const s = subtotal(), e = envio(), r = document.getElementById('regalo').checked ? CFG.costo_regalo : 0;
   document.getElementById('c-res').innerHTML = `
     <div class="r"><span>${bolsa.reduce((a,b)=>a+b.q,0)} artículos</span><span>${money(s)}</span></div>
     <div class="r"><span>Envío</span><span>${e?money(e):'Gratis'}</span></div>
@@ -811,26 +868,68 @@ function abrirCheckout(){
     <div class="r b"><span>Total</span><span>${money(s+e+r)}</span></div>`;
   abrirModal('md-co');
 }
-function confirmar(){
+const ERRORES = {
+  DATOS_INVALIDOS:'Revisa tu nombre, WhatsApp (10 dígitos) y dirección.',
+  CANTIDAD_INVALIDA:'Hay una cantidad no válida en tu bolsa.',
+  PRODUCTO_NO_DISPONIBLE:'Un producto de tu bolsa ya no está disponible.',
+  PAGO_INVALIDO:'Elige una forma de pago.',
+  PEDIDO_INVALIDO:'Tu bolsa está vacía.'
+};
+async function confirmar(){
   const nom = document.getElementById('c-nom').value.trim();
-  const tel = document.getElementById('c-tel').value.replace(/\D/g,'');
+  const tel = document.getElementById('c-tel').value.replace(/\D/g,'').slice(-10);
   const calle = document.getElementById('c-calle').value.trim();
-  if(!nom || tel.length<10 || !calle){ toast('Completa nombre, WhatsApp y dirección'); return; }
-  const num = 'HB-' + (Math.floor(Math.random()*9000)+1000);
-  const s = subtotal(), e = envio(), r = document.getElementById('regalo').checked ? 150 : 0;
-  const lineas = bolsa.map(it=>{ const p = productos.find(x=>x.id===it.id); return `• ${it.q}× ${p.n} (${cap(it.color)}${it.talla?', talla '+it.talla:''}${it.mono?', monograma '+it.mono:''}) — ${money(precioItem(it)*it.q)}`; }).join('\n');
-  const msg = `*Pedido ${num} — Harlow & Blake*\n${lineas}\n\nEnvío: ${e?money(e):'Gratis'}${r?'\nEmpaque de regalo: $150':''}\n*Total: ${money(s+e+r)}*\nPago: ${pagoSel}\n\n${nom}\n${tel}\n${calle}, ${document.getElementById('c-col').value.trim()}, ${document.getElementById('c-cd').value.trim()}`;
+  const col = document.getElementById('c-col').value.trim();
+  const cd = document.getElementById('c-cd').value.trim();
+  if(nom.length < 2 || tel.length !== 10 || calle.length < 3){ toast('Completa nombre, WhatsApp de 10 dígitos y dirección'); return; }
+  const btn = document.getElementById('c-btn'); btn.disabled = true; btn.textContent = 'Enviando pedido…';
+  const regalo = document.getElementById('regalo').checked;
+  const { data, error } = await sb.rpc('crear_pedido', {
+    p_items: bolsa.map(b=>({id:b.id, q:b.q, color:b.color, talla:b.talla||'', mono:b.mono})),
+    p_cliente: {nombre:nom, tel}, p_direccion: {calle, colonia:col, ciudad:cd}, p_pago: pagoSel, p_regalo: regalo
+  });
+  if(error){
+    btn.disabled = false; btn.textContent = 'Confirmar pedido';
+    const m = error.message || '';
+    if(m.startsWith('SIN_STOCK:')){ toast(`Ya no hay suficientes piezas de "${m.slice(10)}"`); cargarProductos(); }
+    else toast(ERRORES[m] || 'No se pudo enviar el pedido. Intenta de nuevo.');
+    return;
+  }
+  const lineas = data.items.map(it=>`• ${it.q}× ${it.nombre} (${cap(it.color)}${it.talla?', talla '+it.talla:''}${it.mono?', monograma '+it.mono:''}) — ${money(it.precio*it.q)}`).join('\n');
+  const msg = `*Pedido ${data.folio} — Harlow & Blake*\n${lineas}\n\nEnvío: ${Number(data.envio)?money(data.envio):'Gratis'}${Number(data.regalo)?'\nEmpaque de regalo: '+money(data.regalo):''}\n*Total: ${money(data.total)}*\nPago: ${pagoSel}\n\n${nom}\n${tel}\n${calle}${col?', '+col:''}${cd?', '+cd:''}`;
   document.getElementById('co-box').innerHTML = `
-    <button class="x" onclick="cerrarModal('md-co');location.reload()" aria-label="Cerrar">×</button>
+    <button class="x" onclick="cerrarModal('md-co')" aria-label="Cerrar">×</button>
     <div class="ok">
-      <div class="num">Pedido ${num}</div>
+      <div class="num">Pedido ${esc(data.folio)}</div>
       <h3>Gracias, ${esc(nom.split(' ')[0])}</h3>
-      <p>Recibimos tu pedido. Te escribiremos por WhatsApp para confirmar el pago y la fecha de entrega.</p>
-      <div class="steps"><div class="st on"><i></i>Recibido</div><div class="st"><i></i>Preparando</div><div class="st"><i></i>En camino</div><div class="st"><i></i>Entregado</div></div>
-      <a class="wa" href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
-      <button class="btn-o" style="width:100%" onclick="cerrarModal('md-co');location.reload()">Seguir comprando</button>
+      <p>Recibimos tu pedido. Te escribiremos por WhatsApp para confirmar el pago y la fecha de entrega.<br><small>Guarda tu folio <b>${esc(data.folio)}</b> para rastrear tu pedido.</small></p>
+      ${pasos('recibido')}
+      <a class="wa" href="https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+      <button class="btn-o" style="width:100%" onclick="cerrarModal('md-co')">Seguir comprando</button>
     </div>`;
-  bolsa = []; contadores();
+  bolsa = []; document.getElementById('regalo').checked = false; actualizarBolsa();
+  cargarProductos();
+}
+
+/* ═══ RASTREO ═══ */
+const ESTADOS = ['recibido','confirmado','enviado','entregado'];
+const ESTN = {recibido:'Recibido', confirmado:'Confirmado', enviado:'En camino', entregado:'Entregado', cancelado:'Cancelado'};
+function pasos(estado){
+  if(estado === 'cancelado') return '<div class="cancelado">Este pedido fue cancelado. Si tienes dudas, escríbenos por WhatsApp.</div>';
+  const i = ESTADOS.indexOf(estado);
+  return `<div class="steps">${ESTADOS.map((e,k)=>`<div class="st ${k<=i?'on':''}"><i></i>${ESTN[e]}</div>`).join('')}</div>`;
+}
+function abrirRastreo(){ cerrarTodo(); document.getElementById('r-res').innerHTML = ''; abrirModal('md-rs'); setTimeout(()=>document.getElementById('r-folio').focus(),100); }
+async function rastrear(){
+  const f = document.getElementById('r-folio').value.trim().toUpperCase();
+  const t = document.getElementById('r-tel').value.replace(/\D/g,'');
+  const out = document.getElementById('r-res');
+  if(!/^HB-\d{4,}$/.test(f) || t.length !== 4){ out.innerHTML = '<p class="r-msg">Escribe tu folio (ej. HB-0012) y los últimos 4 dígitos de tu WhatsApp.</p>'; return; }
+  out.innerHTML = '<p class="r-msg">Buscando…</p>';
+  const { data, error } = await sb.rpc('rastrear_pedido', { p_folio:f, p_tel4:t });
+  if(error || !data){ out.innerHTML = '<p class="r-msg">No encontramos ese pedido. Revisa el folio y los dígitos.</p>'; return; }
+  out.innerHTML = `<div class="ok" style="margin-top:20px"><div class="num">Pedido ${esc(data.folio)} · ${money(data.total)}</div><h3 style="font-size:28px">${ESTN[data.estado]}</h3>${pasos(data.estado)}
+    <ul class="r-items">${data.items.map(it=>`<li>${it.q}× ${esc(it.nombre)}</li>`).join('')}</ul></div>`;
 }
 
 /* ═══ BÚSQUEDA ═══ */
@@ -839,8 +938,8 @@ function buscar(){
   const q = document.getElementById('s-in').value.trim().toLowerCase();
   const r = document.getElementById('s-res');
   if(!q){ r.innerHTML = `<div class="s-sug">Populares: <button onclick="sug('abrigo')">abrigo</button><button onclick="sug('polo')">polo</button><button onclick="sug('piel')">piel</button><button onclick="sug('suéter')">suéter</button></div>`; return; }
-  const l = productos.filter(p => (p.n+' '+p.tipo+' '+p.d+' '+CATN[p.cat]).toLowerCase().includes(q));
-  r.innerHTML = l.length ? `<div class="s-res">${l.slice(0,8).map(p=>`<div class="s-it" onclick="cerrarTodo();abrirQV(${p.id})"><img src="${U(p.img[0])}" alt=""><div>${esc(p.n)}</div><span>${money(p.p)}</span></div>`).join('')}</div>` : `<div class="s-sug">No encontramos "${esc(q)}". Prueba con otra palabra.</div>`;
+  const l = productos.filter(p => (p.n+' '+p.tipo+' '+p.d+' '+(CATN[p.cat]||'')).toLowerCase().includes(q));
+  r.innerHTML = l.length ? `<div class="s-res">${l.slice(0,8).map(p=>`<div class="s-it" onclick="cerrarTodo();abrirQV(${p.id})"><img src="${esc(U(p.img[0]))}" alt=""><div>${esc(p.n)}</div><span>${money(p.p)}</span></div>`).join('')}</div>` : `<div class="s-sug">No encontramos "${esc(q)}". Prueba con otra palabra.</div>`;
 }
 function sug(t){ document.getElementById('s-in').value = t; buscar(); }
 
@@ -861,10 +960,12 @@ function abrirModal(id){ document.getElementById(id).classList.add('on'); docume
 function cerrarModal(id){ document.getElementById(id).classList.remove('on'); document.body.style.overflow=''; }
 document.querySelectorAll('.md').forEach(m => m.addEventListener('click', e => { if(e.target===m) cerrarModal(m.id); }));
 document.addEventListener('keydown', e => { if(e.key==='Escape'){ cerrarTodo(); document.querySelectorAll('.md.on').forEach(m=>cerrarModal(m.id)); } });
-function toast(m){ const t = document.getElementById('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('on'),2400); }
-document.querySelectorAll('.wa-link').forEach(a => a.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero información sobre una prenda.')}`);
+function toast(m){ const t = document.getElementById('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('on'),2600); }
 
-render(); contadores(); actualizarBolsa();
+document.getElementById('grid').innerHTML = Array.from({length:8}).map(()=>'<div class="sk"><div class="sk-img"></div><div class="sk-l"></div><div class="sk-l s"></div></div>').join('');
+contadores(); actualizarBolsa();
+cargarConfig().then(actualizarBolsa);
+cargarProductos();
 </script>
 </body>
 </html>
